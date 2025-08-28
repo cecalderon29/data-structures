@@ -44,7 +44,7 @@ public class ListDemo
         //iter.remove(); This line would cause an illegal state exception
         //thr remove method removes the element returned  after calling next or previous
         iter.next();// TNCBP|S
-        iter.remove(); //Peter removed -> Tony, Natasha, Steve, Clint, Bruce
+        iter.remove(); //Peter removed -> Tony, Natasha, Clint, Bruce, Nat
         System.out.println(staff);
 
 
