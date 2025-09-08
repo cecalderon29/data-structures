@@ -35,11 +35,28 @@ public class SudokuSolver {
             System.out.println("Cannot open: " + fileName);
         }
 
+
         // create the list of sets for each row (this.rows)
-        // ...
+        for (int[] row : this.grid)
+        {
+            Set<Integer> tempSet = new HashSet<>();
+            for(int val : row)
+            {
+                tempSet.add(val);
+            }
+            rows.add(tempSet);
+        }
 
         // create the list of sets for each col (this.cols)
-        // ...
+        for (int x = 0; x < this.grid.length; x++)
+        {
+            Set<Integer> tempSet = new HashSet<>();
+            for (int y = 0; y < this.grid[x].length; y++)
+            {
+                tempSet.add(this.grid[y][x]);
+            }
+            this.cols.add(tempSet);
+        }
 
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
@@ -47,10 +64,27 @@ public class SudokuSolver {
             3 4 5
             6 7 8
          */
-        // ...
+
+        for (int row = 0; row < this.M; row++){
+            for (int col = 0; col < this.M; col++){
+                Set<Integer> tempSet = new HashSet<>();
+                for(int inRow = 0; inRow < this.M; inRow++){
+                    for(int inCol = 0; inCol < this.M; inCol++){
+                        tempSet.add(this.grid[row*M+inRow][col*M+inCol]);
+                    }
+                }
+                this.squares.add(tempSet);
+            }
+        }
+        
+        //add set to list
+        //max+=3
 
         // create a hash set for [1..9] (this.nums)
-        // ...
+        for (int i = 1; i <= 9; i++)
+        {
+            nums.add(i);
+        }
 
         // visually inspect that all the sets are correct
         for (int row = 0; row < N; row++) {
@@ -96,8 +130,54 @@ public class SudokuSolver {
          */
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
+        int index = -1;
+
+        if (nextRow < 3)
+        {
+            if (nextCol < 3)
+            {
+                index = 0;
+            }
+            if (nextCol < 6)
+            {
+                index = 1;
+            }
+            if (nextCol < 9)
+            {
+                index = 2;
+            }
+        }
+        else if (nextRow < 6)
+        {
+            if (nextCol < 3)
+            {
+                index = 3;
+            }
+            if (nextCol < 6)
+            {
+                index = 4;
+            }
+            if (nextCol < 9)
+            {
+                index = 5;
+            }
         
-        // ...
+        }
+        else if (nextRow < 9)
+        {
+            if (nextCol < 3)
+            {index = 6;}
+            if (nextCol < 6)
+            {index = 7;}
+            if (nextCol < 9)
+            {index = 8;}
+        }
+
+        possibleNums.removeAll(rows.get(nextRow));
+        possibleNums.removeAll(cols.get(nextCol));
+        possibleNums.removeAll(squares.get(index));
+
+
 
         // if there are no possible numbers, we cannot solve the board in its current state
         if (possibleNums.isEmpty()) {
@@ -107,8 +187,27 @@ public class SudokuSolver {
         // try each possible number
         for (Integer possibleNum : possibleNums) {
             // update the grid and all three corresponding sets with possibleNum
-            // ...
+            grid[nextRow][nextCol] = possibleNum;
+            Set<Integer> row = rows.get(nextRow);
+            int count = 0;
+            for (int value: row){
+                if (count == nextCol){
+                    value = possibleNum;
+                }
+                count++;
+            }
+            Set<Integer> col = cols.get(nextCol);
+            count = 0;
+            for (int value: col){
+                if (count == nextRow){
+                    value = possibleNum;
+                }
+                count++;
+            }
 
+            Set<Integer> square = squares.get(index);
+
+            
             // recursively solve the board
             if (this.solve()) {
                 // the board is solved!
