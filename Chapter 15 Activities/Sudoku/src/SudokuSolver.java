@@ -135,33 +135,20 @@ public class SudokuSolver {
         if (nextRow < 3)
         {
             if (nextCol < 3)
-            {
-                index = 0;
-            }
+            {index = 0;}
             if (nextCol < 6)
-            {
-                index = 1;
-            }
+            { index = 1;}
             if (nextCol < 9)
-            {
-                index = 2;
-            }
+            {index = 2;  }
         }
         else if (nextRow < 6)
         {
             if (nextCol < 3)
-            {
-                index = 3;
-            }
+            {index = 3; }
             if (nextCol < 6)
-            {
-                index = 4;
-            }
+            { index = 4;}
             if (nextCol < 9)
-            {
-                index = 5;
-            }
-        
+            { index = 5; }
         }
         else if (nextRow < 9)
         {
@@ -188,24 +175,9 @@ public class SudokuSolver {
         for (Integer possibleNum : possibleNums) {
             // update the grid and all three corresponding sets with possibleNum
             grid[nextRow][nextCol] = possibleNum;
-            Set<Integer> row = rows.get(nextRow);
-            int count = 0;
-            for (int value: row){
-                if (count == nextCol){
-                    value = possibleNum;
-                }
-                count++;
-            }
-            Set<Integer> col = cols.get(nextCol);
-            count = 0;
-            for (int value: col){
-                if (count == nextRow){
-                    value = possibleNum;
-                }
-                count++;
-            }
-
-            Set<Integer> square = squares.get(index);
+            rows.get(nextRow).add(possibleNum);
+            cols.get(nextCol).add(possibleNum);
+            squares.get(index).add(possibleNum);
 
             
             // recursively solve the board
@@ -218,7 +190,10 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                // ...
+                grid[nextRow][nextCol] = 0;
+                rows.get(nextRow).remove(possibleNum);
+                cols.get(nextCol).remove(possibleNum);
+                squares.get(index).remove(possibleNum);
             }
         }
 
