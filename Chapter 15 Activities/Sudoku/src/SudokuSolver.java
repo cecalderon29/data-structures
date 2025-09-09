@@ -6,10 +6,12 @@ public class SudokuSolver {
     private final int M = 3;
     private final int N = M * M;
     private int[][] grid;
-    private ArrayList<Set<Integer>> rows;
-    private ArrayList<Set<Integer>> cols;
-    private ArrayList<Set<Integer>> squares;
-    private Set<Integer> nums;
+    private ArrayList<Set<Integer>> rows = new ArrayList<>();;
+    private ArrayList<Set<Integer>> cols = new ArrayList<>();;
+    private ArrayList<Set<Integer>> squares = new ArrayList<>();;
+    private Set<Integer> nums = new HashSet<>();
+
+
 
     public SudokuSolver(String fileName) {
         // read the puzzle file
@@ -130,35 +132,7 @@ public class SudokuSolver {
          */
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
-        int index = -1;
-
-        if (nextRow < 3)
-        {
-            if (nextCol < 3)
-            {index = 0;}
-            if (nextCol < 6)
-            { index = 1;}
-            if (nextCol < 9)
-            {index = 2;  }
-        }
-        else if (nextRow < 6)
-        {
-            if (nextCol < 3)
-            {index = 3; }
-            if (nextCol < 6)
-            { index = 4;}
-            if (nextCol < 9)
-            { index = 5; }
-        }
-        else if (nextRow < 9)
-        {
-            if (nextCol < 3)
-            {index = 6;}
-            if (nextCol < 6)
-            {index = 7;}
-            if (nextCol < 9)
-            {index = 8;}
-        }
+        int index = (nextRow / M) * M + (nextCol / M);
 
         possibleNums.removeAll(rows.get(nextRow));
         possibleNums.removeAll(cols.get(nextCol));
@@ -215,7 +189,7 @@ public class SudokuSolver {
     }
 
     public static void main(String[] args) {
-        String fileName = "src/puzzle1.txt";
+        String fileName = "Chapter 15 Activities\\Sudoku\\src\\puzzle1.txt";
 
         SudokuSolver solver = new SudokuSolver(fileName);
         System.out.println(solver);
