@@ -10,7 +10,7 @@ public class Gradebook
     {
         Scanner in = new Scanner(System.in);
 
-        . . .
+        Map<String, String> gradebook = new HashMap<>();
 
         boolean done = false;
         while(!done)
@@ -22,7 +22,10 @@ public class Gradebook
                 done = true;
             } else if (input.equals("A"))
             {
-                . . .
+                System.out.println("Who would you like to add?");
+                String name = in.next()
+                
+                
 
             } else if (input.equals("R"))
             {
