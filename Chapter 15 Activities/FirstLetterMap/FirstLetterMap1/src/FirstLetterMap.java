@@ -32,16 +32,19 @@ public class FirstLetterMap
 
                 String mapWord = words.get(c);
                 if (mapWord == null) {mapWord = word;}
-                else {mapWord += word;}
+                else {mapWord += ","+word;}
                 words.put(c, mapWord);
-
+                //System.out.println(mapWord);
 
             }
 
             // Print the map here in this form
             // a: [a, able, aardvark]
             
-            Set<Character> alphabet = new TreeSet<>();
+            List<Character> alphabet = new ArrayList<>(words.keySet());
+            Collections.sort(alphabet);
+
+
             for (Character letter: alphabet)
             {
                 String[] wordsList = words.get(letter).split(",");
