@@ -27,7 +27,7 @@ public class FirstLetterMap
                 String mapWord = words.get(c);
                 // Update the map here
                 // Modify Worked Example 15.1
-                words.merge(c, word, (mapWord, word) -> mapWord + ","+ word);
+                words.merge(c, word, (oldVal, newVal) -> mapWord + ","+ word);
 
 
             }
