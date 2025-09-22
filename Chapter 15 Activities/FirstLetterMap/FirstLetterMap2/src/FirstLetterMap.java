@@ -18,23 +18,35 @@ public class FirstLetterMap
         {
 
             // Create your map here
-            ...
+            Map<Character, String> words = new HashMap<>();
 
             while (in.hasNext())
             {
                 String word = clean(in.next());
                 Character c = word.charAt(0);
-
+                String mapWord = words.get(c);
                 // Update the map here
                 // Modify Worked Example 15.1
-                . . .
+                words.merge(c, word, (oldVal, newVal) -> mapWord + ","+ word);
 
 
             }
 
             // Print the map here in this form
             // a: [a, able, aardvark]
-            . . .
+            List<Character> alphabet = new ArrayList<>(words.keySet());
+            Collections.sort(alphabet);
+
+
+            for (Character letter: alphabet)
+            {
+                String[] wordsList = words.get(letter).split(",");
+                System.out.print(letter+": [");
+                for (String w: wordsList){
+                    System.out.print(w+", ");
+                }
+                System.out.println("]");
+            }
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);

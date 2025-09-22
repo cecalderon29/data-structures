@@ -1,5 +1,5 @@
 import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 /**
  * Implement a to do list. Tasks have a priority between 
  * 1 and 9 (with 1 being most urgent), and a description.
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ToDoList
 {
     // Instance variable(s)
-    . . .
+    private Queue<Task> tasks;
 
     /**
      * Constructor
@@ -20,7 +20,7 @@ public class ToDoList
     public ToDoList()
     {
         // Complete this
-        . . .
+        tasks = new PriorityQueue<Task>();
     }
 
     /**
@@ -30,9 +30,9 @@ public class ToDoList
     {
         String option = "";
         System.out.println("To Do List - Please enter an option");
-        System.out.println("     add priority description (add a new task)");
-        System.out.println("     next (remove and print most urgent task)");
-        System.out.println("     quit (exit this program)");
+        System.out.println("add)     add priority description (add a new task)");
+        System.out.println("next)    next (remove and print most urgent task)");
+        System.out.println("quit)     quit (exit this program)");
         System.out.println();
         
         Scanner in = new Scanner(System.in);
@@ -60,8 +60,15 @@ public class ToDoList
     public void addTask(String optionStr)
     {
         // Complete this method
-        . . .
-            
+        optionStr = optionStr.replace("add ", "");
+        try{
+            int num = Integer.parseInt(optionStr.substring(0,1));
+            String description = optionStr.substring(1);
+            tasks.add(new Task(num, description));
+        }
+        catch(Exception NumberFormatException){
+            System.out.println("Bad command");
+        }
             
     }
 
@@ -74,14 +81,20 @@ public class ToDoList
         Task next = null;
         
         // Complete this method
-        . . .
         
+        try {
+            next = tasks.remove();
+        }
+        catch(Exception NoSuchElementException){
+            
+        }
         
         if (next == null)
         {
             System.out.println("There are no tasks in the list.");
         } else
         {
+            next = tasks.remove();
             System.out.println(next.getDescription());
         }
     }
