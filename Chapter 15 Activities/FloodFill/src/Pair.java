@@ -15,18 +15,6 @@ public class Pair {
         return column;
     }
 
-    public int getUpper(){
-        return row - 1;
-    }
-    public int getLower(){
-        return row + 1;
-    }
-    public int getLeft(){
-        return column - 1;
-    }
-    public int getRight(){
-        return column + 1;
-    }
     @Override
     public String toString() {
         return "(" + row + ", " + column + ")";
