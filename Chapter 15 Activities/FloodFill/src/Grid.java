@@ -10,10 +10,10 @@ public class Grid
      * Flood fill, starting with the given row and column.
     */
     public void floodfill(int row, int column)
-    {   
+    {
+        
         Pair pair1 = new Pair(row, column);
         pair.push(pair1);
-        
 
         if (row > 0 && pixels[row][pair1.getUpper()] == 0)
         {
@@ -31,7 +31,8 @@ public class Grid
         {
             floodfill(pair1.getRight(), column);
         }
-
+       
+        
         Pair pair2 = pair.pop();
 
         int row1 = pair2.getRow();
@@ -39,6 +40,11 @@ public class Grid
         if ( pixels[row1][column1] == 0)
         {
             pixels[row1][column1] = ++count;
+        }
+        
+        if (pair.size() == 0)
+        {
+            return;
         }
 
     }
