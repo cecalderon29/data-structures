@@ -4,7 +4,7 @@ public class Grid
 {
     private static final int SIZE = 10;
     int[][] pixels = new int[SIZE][SIZE];
-    private Stack<Pair> pair = new Stack<>();
+    
     private  int count = 0;
     /**
      * Flood fill, starting with the given row and column.
@@ -17,7 +17,31 @@ public class Grid
 
         if (row > 0 && pixels[row][pair1.getUpper()] == 0)
         {
-            floodfill(row, pair1.getUpper());
+            Pair pair = pairs.pop();
+            int r = pair.getRow();
+            int c = pair.getColumn();
+            
+            if (r < 0 || r >= SIZE || c < 0 || c >= SIZE)
+            {
+                continue;
+            }
+            
+            if (pixels[r][c] == 0)
+            {
+                pixels[r][c] = ++count;
+               
+                
+                pairs.push(new Pair(r - 1, c)); //up
+                pairs.push(new Pair(r, c - 1)); //left
+                pairs.push(new Pair(r, c + 1)); //right
+                pairs.push(new Pair(r + 1, c)); //down
+                
+                
+                
+                
+                
+                
+            }
         }
         if (row < 10 && pixels[row][pair1.getLower()] == 0)
         {
