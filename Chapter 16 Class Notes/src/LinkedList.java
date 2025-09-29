@@ -64,9 +64,68 @@ public class LinkedList
         newNode.next = first;
         first = newNode;
     }
-
-
-
+    /**
+     * Checks size of linked list
+     * @return size
+     */
+    /* Not recursive
+    public int size(){
+        int size = 0;
+        Node current = first;
+        while (current != null){
+            size++;
+            current = current.next;
+        }
+        return size;
+    }
+    */
+    /**
+     * Checks size of linked list
+     * @param current
+     * @return size
+     */
+    //Recursize 
+    public int size(Node current){
+        int size = 0;
+        if (current == null)
+            return size;
+        return 1 + size(current.next);
+    }
+    /**
+     * Checks whether linked list contains an objects
+     * @return object obj
+     */
+    /* Not recursive
+    public boolean contains(Object obj){
+        boolean contains = false;
+        Node current = first;
+        while (current != null){
+            if (current.element == obj){
+                contains = true;
+                break;
+            }
+            current = current.next;
+        }
+        return contains;
+    }
+    */
+    /**
+     * Checks whether linked list contains an objects
+     * @param current
+     * @param obj
+     * @return
+     */
+    //Recursive
+    public boolean contains(Node current, Object obj){
+        if (current == null){
+            return false;
+        }
+        if (current.element == obj){
+            return true;
+        }
+        return contains(current.next, obj);
+        
+    }
     /**
         Returns an iterator for iterating through this list.
         @return an iterator for iterating through this list
