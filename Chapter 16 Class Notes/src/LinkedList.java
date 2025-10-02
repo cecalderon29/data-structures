@@ -30,7 +30,7 @@ public class LinkedList
     public Object getFirst()
     {
         if (first == null) throw new NoSuchElementException();
-        return this.first.element;
+        return this.first.data;
     }
 
 
@@ -44,7 +44,7 @@ public class LinkedList
         if (first == null) throw new NoSuchElementException();
 
 
-        Object element = first.element;
+        Object element = first.data;
         first = first.next;
         return element;
     }
@@ -60,7 +60,7 @@ public class LinkedList
     public void addFirst(Object element)
     {
         Node newNode = new Node();
-        newNode.element = element;
+        newNode.data = element;
         newNode.next = first;
         first = newNode;
     }
@@ -100,7 +100,7 @@ public class LinkedList
         boolean contains = false;
         Node current = first;
         while (current != null){
-            if (current.element == obj){
+            if (current.data == obj){
                 contains = true;
                 break;
             }
@@ -120,7 +120,7 @@ public class LinkedList
         if (current == null){
             return false;
         }
-        if (current.element == obj){
+        if (current.data == obj){
             return true;
         }
         return contains(current.next, obj);
@@ -156,7 +156,7 @@ public class LinkedList
     private static class Node
     {
         public Node next;
-        public Object element;
+        public Object data;
 
     }
 
@@ -199,7 +199,7 @@ public class LinkedList
             }
             isAfterNext= true;
 
-            return position.element;
+            return position.data;
         }
 
 
@@ -232,7 +232,7 @@ public class LinkedList
             }
             else {
                 Node newNode = new Node();
-                newNode.element = element;
+                newNode.data = element;
                 newNode.next = position.next;
                 
                 //set next element of the CURENT postion to point to the new node
@@ -280,7 +280,7 @@ public class LinkedList
             if (!isAfterNext){
                 throw new IllegalStateException();
             }
-            position.element = element;
+            position.data = element;
             //We dont have to reset isAfterNExt because the structure of the list has not changed
 
         }
