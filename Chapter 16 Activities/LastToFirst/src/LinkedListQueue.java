@@ -21,9 +21,17 @@ public class LinkedListQueue
         Moves the tail of the queue to the head.
     */
     public void lastToFirst()
-    {
-        . . .
+    {    
+        if(head == null)
+            throw new IllegalStateException();
 
+        
+        tail.next = head;
+        head = tail;
+
+        tail= tail.next.next;
+        tail.next = null;
+        
 
 
 
